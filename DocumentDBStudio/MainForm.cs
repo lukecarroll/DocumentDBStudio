@@ -484,7 +484,12 @@ namespace Microsoft.Azure.DocumentDBStudio
             }
         }
 
-        public FeedOptions GetFeedOptions()
+        /// <summary>
+        /// Get feed options for running a query
+        /// </summary>
+        /// <param name="applyPartitionKey">Use partition key from configuration when running a query</param>
+        /// <returns></returns>
+        public FeedOptions GetFeedOptions(bool applyPartitionKey = false)
         {
             FeedOptions feedOptions = new FeedOptions();
 
@@ -531,6 +536,11 @@ namespace Microsoft.Azure.DocumentDBStudio
             else if (cbEnableCrossPartitionQuery.CheckState == CheckState.Unchecked)
             {
                 feedOptions.EnableCrossPartitionQuery = false;
+            }
+
+            if (applyPartitionKey && tbPartitionKeyForRequestOption.Text.Length > 0)
+            {
+                feedOptions.PartitionKey = new PartitionKey(tbPartitionKeyForRequestOption.Text);
             }
 
             return feedOptions;

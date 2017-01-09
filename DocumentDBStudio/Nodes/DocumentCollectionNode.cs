@@ -332,7 +332,7 @@ namespace Microsoft.Azure.DocumentDBStudio
                 // text is the querytext.
                 IDocumentQuery<dynamic> q = null;
 
-                var feedOptions = Program.GetMain().GetFeedOptions();
+                var feedOptions = Program.GetMain().GetFeedOptions(true);
 
                 if (requestOptions == null)
                 {
